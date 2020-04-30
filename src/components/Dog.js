@@ -1,18 +1,23 @@
-import React from 'react';
+import React from "react";
 import FavoriteActions from "./FavoriteActions";
-
-const Dog = ({id, name, toggle, getStatus}) => {
-    return <li key={id} style={{
-        margin: "15px"
-    }}>
-                            <span style={{
-                                display: "inline-block",
-                                marginRight: "15px"
-                            }}>
-                                {name}
-                            </span>
-        <FavoriteActions toggle={toggle} id={id} getStatus={getStatus}/>
-    </li>
+import { Link } from "react-router-dom";
+import "./styles.css";
+const Dog = ({ id, name, toggle, getStatus, lockButton }) => {
+  return (
+    <div className="favDog" key={id}>
+      <Link to={`/detail/${id}`}>
+        <div className="names">
+          {name}
+          <br />
+        </div>
+      </Link>
+      <FavoriteActions
+        toggle={toggle}
+        id={id}
+        getStatus={getStatus}
+        lockButton={lockButton}
+      />
+    </div>
+  );
 };
-
 export default Dog;

@@ -1,0 +1,11 @@
+.favDog {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+
+}
+
+.names {
+    margin-top: 2em;
+}
