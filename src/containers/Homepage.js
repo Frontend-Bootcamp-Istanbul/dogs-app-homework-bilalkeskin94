@@ -1,50 +1,19 @@
 import React from "react";
 import dogs from "../dogsdata";
 import Dog from "../components/Dog";
-import axios from "axios";
-
-const apiHost = "https://5ea5689a2d86f00016b45bea.mockapi.io";
-
+import { connect } from "react-redux";
+import { fetchData } from "../redux/actions";
 class Homepage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      favorites: [],
-      loadingFavorites: false,
-      lockButton: "",
-    };
-  }
   componentDidMount() {
     // localstoragedan getirme
     /*        this.setState({
             favorites: window.localStorage.getItem("favorites") ? JSON.parse(window.localStorage.getItem("favorites")): []
         })*/
-
-    this.setState(
-      {
-        loadingFavorites: true,
-      },
-      () => {
-        axios
-          .get(`${apiHost}/favorites`)
-          .then((result) => {
-            this.setState({
-              favorites: result.data,
-              loadingFavorites: false,
-            });
-          })
-          .catch((err) => {
-            console.log("Axios err", err);
-            this.setState({
-              loadingFavorites: false,
-            });
-          });
-      }
-    );
+    this.props.fetchData();
   }
 
-  toggle = (dogId) => {
-    this.setState({ lockButton: dogId });
+  /*toggle = (dogId) => {
+    getId(dogId);
     const foundDog = this.state.favorites.find(
       (favorite) => favorite.dogId === dogId
     );
@@ -60,6 +29,7 @@ class Homepage extends React.Component {
             lockButton: false,
           });
         })
+
         .catch((err) => {
           console.log(err);
         });
@@ -80,17 +50,10 @@ class Homepage extends React.Component {
           console.log(err);
         });
     }
-  };
-
-  getStatus = (dogId) => {
-    const foundDog = this.state.favorites.find(
-      (favorite) => favorite.dogId === dogId
-    );
-    return foundDog;
-  };
+  };*/
 
   render() {
-    if (this.state.loadingFavorites) {
+    if (this.props.loadingFavorites) {
       return (
         <div>
           <h1>Sayfa Yukleniyor.....</h1>
@@ -101,20 +64,15 @@ class Homepage extends React.Component {
       <div>
         <ul>
           {dogs.map((dog) => {
-            return (
-              <Dog
-                toggle={this.toggle}
-                id={dog.id}
-                getStatus={this.getStatus}
-                {...dog}
-                lockButton={this.state.lockButton}
-              />
-            );
+            return <Dog id={dog.id} name={dog.name} image={dog.image} />;
           })}
         </ul>
       </div>
     );
   }
 }
+const mapDispatchToProps = {
+  fetchData,
+};
 
-export default Homepage;
+export default connect(null, mapDispatchToProps)(Homepage);
