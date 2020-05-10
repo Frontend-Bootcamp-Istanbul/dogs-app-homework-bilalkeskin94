@@ -28,13 +28,19 @@ const Dog = ({ id, name, image }) => {
   );
 };
 Dog.propTypes = {
-  id: propTypes.number,
-  name: propTypes.string,
-  image: propTypes.string,
+  id: PropTypes.number,
+  name: PropTypes.string,
+  image: PropTypes.string,
+  getStatus: PropTypes.bool,
+  lockButton: PropTypes.bool,
+  toggle: PropTypes.func,
 };
 Dog.defaultProps = {
-  id: "Köpek Id",
   name: "Köpek İsmi:",
-  image: "Image Url",
+  getStatus: false,
+  toggle: false,
+  lockButton: false,
+  image:
+    "https://www.vets4pets.com/siteassets/species/dog/puppy/puppy-running-playing.jpg?w=585&scale=down",
 };
 export default Dog;
