@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 import Image from "react-bootstrap/Image";
 import { Container, Row, Col } from "react-bootstrap";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 const Dog = ({ id, name, image }) => {
   return (
     <Container className="container-fluid mt-2 d-lg-inline-flex ">
